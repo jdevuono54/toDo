@@ -2,7 +2,7 @@
     <stack-layout>
         <Label text="Qui êtes-vous ?" />
         <TextField v-model="firstname" hint="Votre prénom"/>
-        <TextField v-model="lastname" hint="Votre nom"/>
+        <TextField v-model="lastname" hint="Votre nom" class="lastField"/>
 
         <Button text="Continuer" @tap="next" class="btnContinue"/>
     </stack-layout>
@@ -19,3 +19,9 @@
         }
     }
 </script>
+
+<style>
+    .lastField{
+        margin-bottom: 20;
+    }
+</style>

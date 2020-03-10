@@ -24,7 +24,7 @@
                 step:1
             }
         },
-        mounted: () => {
+        mounted: function() {
             this.$bus.$on('firstStepComplete', (firstname,lastname) => {
                 this.firstname = firstname;
                 this.lastname = lastname;

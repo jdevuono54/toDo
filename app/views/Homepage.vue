@@ -19,6 +19,9 @@
             goSignUp() {
                 this.$navigateTo(SignUp)
             }
+        },
+        components:{
+            SignUp
         }
     };
 </script>
