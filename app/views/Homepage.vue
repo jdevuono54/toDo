@@ -1,41 +1,32 @@
 <template>
     <Page>
-        <ActionBar>
-            <Label text="Home"></Label>
-        </ActionBar>
-
-        <GridLayout>
-            <Label class="info">
-                <FormattedString>
-                    <Span class="fas" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                </FormattedString>
-            </Label>
+        <GridLayout rows="*,140">
+            <Image src="~/assets/images/logo.png" row="0" height="200" width="200"/>
+            <stack-layout row="1">
+                <Button text="Inscription" @tap="onButtonTap" class="btn"/>
+                <Button text="Connexion" @tap="onButtonTap" class="btn"/>
+            </stack-layout>
         </GridLayout>
     </Page>
 </template>
 
 <script>
     export default {
-        computed: {
-            message() {
-                return "Blank {N}-Vue app";
-            }
-        }
+        name:"Homepage"
     };
 </script>
 
 <style scoped lang="scss">
     @import '../../node_modules/@nativescript/theme/scss/variables/blue';
 
-    // Custom styles
-    .fas {
-        @include colorize($color: accent);
+    .btn{
+        background-color: darken(#3293e9,10);
+        border-radius: 5;
+        color: white;
+        font-family: "Raleway-Bold";
+        font-weight: 800;
     }
-
-    .info {
-        font-size: 20;
-        horizontal-align: center;
-        vertical-align: center;
+    page{
+        background: linear-gradient(#185abd,#3293e9);
     }
 </style>
