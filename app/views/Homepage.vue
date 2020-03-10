@@ -3,7 +3,7 @@
         <GridLayout rows="*,140">
             <Image src="~/assets/images/logo.png" row="0" height="200" width="200"/>
             <stack-layout row="1">
-                <Button text="Inscription" @tap="onButtonTap" class="btn"/>
+                <Button text="Inscription" @tap="goSignUp" class="btn"/>
                 <Button text="Connexion" @tap="onButtonTap" class="btn"/>
             </stack-layout>
         </GridLayout>
@@ -11,8 +11,15 @@
 </template>
 
 <script>
+    import SignUp from "./SignUp";
+
     export default {
-        name:"Homepage"
+        name:"Homepage",
+        methods:{
+            goSignUp() {
+                this.$navigateTo(SignUp)
+            }
+        }
     };
 </script>
 

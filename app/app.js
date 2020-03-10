@@ -1,6 +1,7 @@
 import Vue from "nativescript-vue";
-
 import Homepage from "./views/Homepage";
+
+Vue.prototype.$bus = new Vue()
 
 new Vue({
 
