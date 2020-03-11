@@ -4,11 +4,15 @@
         <TextField v-model="email" hint="Votre adresse e-mail"/>
         <TextField v-model="password" hint="Votre mot de passe" class="lastField" secure="true"/>
 
-        <Button text="Connexion" @tap="inscription" class="btnLogin"/>
+        <Button text="Connexion" @tap="inscription" class="btnLogin" :isEnabled="email != null && password != null"/>
     </stack-layout>
 </template>
 
 <script>
+    import * as btoa from "btoa";
+    import  {encode,decode} from "base-64"
+    import * as utf8 from "utf8"
+
     export default {
         name:"LoginForm",
         data:function(){
@@ -17,15 +21,18 @@
                 password:null
             }
         },
+        mounted:function(){
+            if(!global.btoa){
+                global.btoa=encode ;
+            }
+        },
         methods:{
             inscription(){
                 this.$http.post('users/signin', {}, {
                     withCredentials:true,
                     auth: {
-                        Authorization: {
-                            username: this.email,
-                            password: this.password
-                        }
+                            username: utf8.encode(this.email),
+                            password: utf8.encode(this.password)
                     }}
                 ).then((response) => {
                     console.log("ok",response)
