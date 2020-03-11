@@ -16,10 +16,11 @@
     import IdentityForm from "../components/SignUp/IdentityForm";
     import MailForm from "../components/SignUp/MailForm";
     import GenderForm from "../components/SignUp/GenderForm";
+    import SignIn from "./SignIn";
 
     export default {
         name:"SignUp",
-        components: {MailForm, IdentityForm,GenderForm},
+        components: {MailForm, IdentityForm,GenderForm,SignIn},
         data:() => {
             return{
                 firstname:null,
@@ -48,14 +49,23 @@
         },
         methods:{
             signUp(){
+                console.log(this.firstname,this.lastname,this.email,this.selectedGender)
                 this.$http.post('users/signup',{
                     firstname : this.firstname,
                     lastname : this.lastname,
                     email : this.email,
                     gender : this.selectedGender
                 }).then((response) => {
-                    this.step ++;
+                    alert({
+                        title: "Inscription réussie !",
+                        message: "Votre mot de passe:"+response.data.password,
+                        okButtonText: "Ok"
+                    }).then(() => {
+                        this.$navigateTo(SignIn)
+                    });
                 }).catch((e) => {
+                    console.log(e)
+                    console.log(e.data)
                     this.error = "Erreur lors de l'inscription !";
             })
             }

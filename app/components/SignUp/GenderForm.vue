@@ -1,6 +1,6 @@
 <template>
     <stack-layout>
-        <Label text="Quelle est genre ?" />
+        <Label text="Quelle est votre genre ?" />
         <ListPicker :items="gender" v-model="selectedGender" class="lastField"/>
 
         <Button text="S'incrire !" @tap="next" class="btnContinue"/>
