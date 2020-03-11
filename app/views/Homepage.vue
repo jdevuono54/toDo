@@ -4,7 +4,7 @@
             <Image src="~/assets/images/logo.png" row="0" height="200" width="200"/>
             <stack-layout row="1">
                 <Button text="Inscription" @tap="goSignUp" class="btn"/>
-                <Button text="Connexion" @tap="onButtonTap" class="btn"/>
+                <Button text="Connexion" @tap="goSignIn" class="btn"/>
             </stack-layout>
         </GridLayout>
     </Page>
@@ -12,16 +12,21 @@
 
 <script>
     import SignUp from "./SignUp";
+    import SignIn from "./SignIn";
 
     export default {
         name:"Homepage",
         methods:{
             goSignUp() {
                 this.$navigateTo(SignUp)
+            },
+            goSignIn(){
+                this.$navigateTo(SignIn)
             }
         },
         components:{
-            SignUp
+            SignUp,
+            SignIn
         }
     };
 </script>

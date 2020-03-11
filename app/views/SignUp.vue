@@ -56,7 +56,6 @@
                 console.log("Button was pressed");
             },
             signUp() {
-                console.log(this.firstname, this.lastname, this.email, this.selectedGender)
                 this.$http.post('users/signup', {
                     firstname: this.firstname,
                     lastname: this.lastname,
