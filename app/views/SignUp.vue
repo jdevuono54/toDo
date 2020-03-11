@@ -4,7 +4,9 @@
             <stack-layout row="1">
                     <IdentityForm :firstname="firstname" :lastname="lastname" v-if="step === 1"></IdentityForm>
                     <MailForm :email="email" v-if="step === 2"></MailForm>
-                    <GenderForm :gender="gender" v-if="step === 3"></GenderForm>
+                    <GenderForm :gender="gender" v-if="step === 3 || error"></GenderForm>
+                    <Label :text="error" v-if="error" class="error"></Label>
+                    <Image src="~/assets/images/logo.png" height="200" width="200" v-if="step === 4"></Image>
             </stack-layout>
         </GridLayout>
     </Page>
@@ -25,7 +27,8 @@
                 email:null,
                 gender:["male","female"],
                 selectedGender:null,
-                step:1
+                step:1,
+                error:null
             }
         },
         mounted: function() {
@@ -39,13 +42,22 @@
                 this.step ++;
             })
             this.$bus.$on('signUp', (gender) => {
-                this.email = gender;
+                this.selectedGender = gender;
                 this.signUp()
             })
         },
         methods:{
             signUp(){
-
+                this.$http.post('users/signup',{
+                    firstname : this.firstname,
+                    lastname : this.lastname,
+                    email : this.email,
+                    gender : this.selectedGender
+                }).then((response) => {
+                    this.step ++;
+                }).catch((e) => {
+                    this.error = "Erreur lors de l'inscription !";
+            })
             }
         }
     };
@@ -85,6 +97,11 @@
             color: white;
             font-family: "Raleway-Bold";
             font-weight: 800;
+        }
+
+        .error{
+            color:red;
+            font-family: "Raleway-Bold";
         }
     }
 </style>
