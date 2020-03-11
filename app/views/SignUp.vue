@@ -32,6 +32,9 @@
                 error:null
             }
         },
+        beforeDestroy() {
+            this.$bus.$off();
+        },
         mounted: function() {
             this.$bus.$on('firstStepComplete', (firstname,lastname) => {
                 this.firstname = firstname;
