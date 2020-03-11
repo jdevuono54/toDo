@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        name:"identity",
+        name:"IdentityForm",
         props:["firstname","lastname"],
         methods:{
             next(){
@@ -20,7 +20,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .lastField{
         margin-bottom: 20;
     }

@@ -1,19 +1,23 @@
 <template>
     <Page>
         <GridLayout rows="*,*,*">
-        <stack-layout row="1">
-                    <identity :firstname="firstname" :lastname="lastname" v-if="step === 1"></identity>
+            <stack-layout row="1">
+                    <IdentityForm :firstname="firstname" :lastname="lastname" v-if="step === 1"></IdentityForm>
+                    <MailForm :email="email" v-if="step === 2"></MailForm>
+                    <GenderForm :gender="gender" v-if="step === 3"></GenderForm>
             </stack-layout>
         </GridLayout>
     </Page>
 </template>
 
 <script>
-    import Identity from "../components/SignUp/identity";
+    import IdentityForm from "../components/SignUp/IdentityForm";
+    import MailForm from "../components/SignUp/MailForm";
+    import GenderForm from "../components/SignUp/GenderForm";
 
     export default {
         name:"SignUp",
-        components: {Identity},
+        components: {MailForm, IdentityForm,GenderForm},
         data:() => {
             return{
                 firstname:null,
@@ -28,9 +32,22 @@
             this.$bus.$on('firstStepComplete', (firstname,lastname) => {
                 this.firstname = firstname;
                 this.lastname = lastname;
-                this.step = 2;
+                this.step ++;
+            })
+            this.$bus.$on('secondStepComplete', (email) => {
+                this.email = email;
+                this.step ++;
+            })
+            this.$bus.$on('signUp', (gender) => {
+                this.email = gender;
+                this.signUp()
             })
         },
+        methods:{
+            signUp(){
+
+            }
+        }
     };
 </script>
 
