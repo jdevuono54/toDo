@@ -4,7 +4,7 @@
         <TextField v-model="firstname" hint="Votre prénom"/>
         <TextField v-model="lastname" hint="Votre nom" class="lastField"/>
 
-        <Button text="Continuer" @tap="next" class="btnContinue"/>
+        <Button text="Continuer" @tap="next" class="btnContinue" :isEnabled="firstname != null && lastname != null"/>
     </stack-layout>
 </template>
 

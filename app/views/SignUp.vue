@@ -1,8 +1,8 @@
 <template>
     <Page>
         <GridLayout rows="*,*,*">
-            <stack-layout row="1">
-                <identity :firstname="firstname" :lastname="lastname"></identity>
+        <stack-layout row="1">
+                    <identity :firstname="firstname" :lastname="lastname" v-if="step === 1"></identity>
             </stack-layout>
         </GridLayout>
     </Page>
@@ -28,7 +28,7 @@
             this.$bus.$on('firstStepComplete', (firstname,lastname) => {
                 this.firstname = firstname;
                 this.lastname = lastname;
-                this.step = 1;
+                this.step = 2;
             })
         },
     };
