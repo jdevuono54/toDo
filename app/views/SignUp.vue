@@ -67,7 +67,7 @@
                         message: "Votre mot de passe:" + response.data.password,
                         okButtonText: "Ok"
                     }).then(() => {
-                        this.$navigateTo(SignIn)
+                        this.$navigateTo(SignIn,{clearHistory:true})
                     });
                 }).catch((e) => {
                     console.log(e)
