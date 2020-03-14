@@ -16,6 +16,7 @@
     "axios": "^0.19.2",
     "base-64": "^0.1.0",
     "btoa": "^1.2.1",
+    "nativescript-couchbase-plugin": "^0.9.6",
     "nativescript-vue": "~2.4.0",
     "tns-core-modules": "~6.4.0",
     "utf8": "^3.0.0"

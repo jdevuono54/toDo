@@ -12,13 +12,14 @@
     import * as btoa from "btoa";
     import  {encode,decode} from "base-64"
     import * as utf8 from "utf8"
+    import Todo from "../../views/Todo";
 
     export default {
         name:"LoginForm",
         data:function(){
             return{
-                email:null,
-                password:null
+                email:"Gzgezd@dadzd.fr",
+                password:"XkUJxx98Vx"
             }
         },
         mounted:function(){
@@ -35,7 +36,8 @@
                             password: utf8.encode(this.password)
                     }}
                 ).then((response) => {
-                    console.log("ok",response)
+                    this.$dbUser.createDocument(response.data)
+                    this.$navigateTo(Todo,{ clearHistory:true})
                 }).catch((e) => {
                     console.log("erreur",e)
                 })
