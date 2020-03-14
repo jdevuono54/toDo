@@ -13,10 +13,8 @@
         name:"Todo",
         data(){
             return{
-                todos:{}
+                todos:this.$store.state.user.user.todos
             }
-        },
-        created(){
         },
         methods:{
             showTodo(){

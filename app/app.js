@@ -3,6 +3,7 @@ import Homepage from "./views/Homepage";
 import Todo from "./views/Todo"
 import axios from "axios";
 import { Couchbase } from "nativescript-couchbase-plugin";
+import store from './store';
 
 Vue.prototype.$bus = new Vue()
 
@@ -13,7 +14,7 @@ Vue.prototype.$http = axios.create({
 Vue.prototype.$dbUser = new Couchbase("user");
 
 new Vue({
-
+    store,
     template: `
         <Frame>
             <Homepage v-if="!connected"/>
@@ -30,7 +31,8 @@ new Vue({
         }
     },
     created:function () {
-        if(this.$dbUser.query({}).length > 0){
+        this.$store.commit("saveUser",this.$dbUser.query({})[0])
+        if(this.$store.state.user != null){
             this.connected = true
         }
     }
