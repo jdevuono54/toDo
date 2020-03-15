@@ -2,6 +2,7 @@
     <stack-layout>
         <TextField class="champs" hint="Contenu" v-model="itemVal"/>
         <Button :isEnabled="itemVal != null" @tap="addItem" class="champs" text="Ajouter"/>
+        <Button @tap="closeModal" text="Annuler"/>
     </stack-layout>
 </template>
 
@@ -24,6 +25,9 @@
                 if (this.$root.connectivity === true) {
                     this.addOnline()
                 }
+                this.$modal.close();
+            },
+            closeModal(){
                 this.$modal.close();
             },
             addOnline() {
