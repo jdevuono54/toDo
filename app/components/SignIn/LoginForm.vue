@@ -4,7 +4,7 @@
         <TextField v-model="email" hint="Votre adresse e-mail"/>
         <TextField v-model="password" hint="Votre mot de passe" class="lastField" secure="true"/>
 
-        <Button text="Connexion" @tap="inscription" class="btnLogin" :isEnabled="email != null && password != null"/>
+        <Button text="Connexion" @tap="connexion" class="btnLogin" :isEnabled="email != null && password != null"/>
     </stack-layout>
 </template>
 
@@ -28,7 +28,7 @@
             }
         },
         methods:{
-            inscription(){
+            connexion(){
                 this.$http.post('users/signin', {}, {
                     withCredentials:true,
                     auth: {
@@ -36,10 +36,11 @@
                             password: utf8.encode(this.password)
                     }}
                 ).then((response) => {
+                    console.log("Connexion réussie")
                     this.$dbUser.createDocument(response.data)
                     this.$navigateTo(Todo,{ clearHistory:true})
                 }).catch((e) => {
-                    console.log("erreur",e)
+                    console.log("Erreur de connexion",e)
                 })
             }
         }

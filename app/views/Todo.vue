@@ -1,6 +1,9 @@
 <template>
     <Page>
-        <ListView :for="todo in this.todos" @itemTap="showTodo">
+        <ActionBar title="Ma liste" class="action-bar">
+            <ActionItem @tap="addTodo" text="+" android.position="actionBar" ios.position="right"/>
+        </ActionBar>
+        <ListView v-for="todo in todos" @itemTap="showTodo">
             <v-template>
                 <Label :text="todo.content" />
             </v-template>
@@ -9,14 +12,19 @@
 </template>
 
 <script>
+    import AddItem from "../components/Todo/AddItem";
+
     export default {
         name:"Todo",
-        data(){
-            return{
-                todos:this.$store.state.user.user.todos
+        computed:{
+            todos: function(){
+                return this.$store.state.user.user.todos
             }
         },
         methods:{
+            addTodo(){
+                this.$showModal(AddItem);
+            },
             showTodo(){
 
             }

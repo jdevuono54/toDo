@@ -10,6 +10,9 @@ export default new Vuex.Store({
     mutations: {
         saveUser(state, user) {
             state.user = user
+        },
+        addTodo(state,todo){
+            state.user.user.todos.push(todo);
         }
     }
 })
