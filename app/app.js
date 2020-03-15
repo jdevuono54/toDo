@@ -43,16 +43,15 @@ new Vue({
     },
     created:function () {
         connectivityModule.startMonitoring((newConnectionType) => {
-            switch (newConnectionType) {
-                case connectivityModule.connectionType.none:
-                    console.log("Lost connexion");
-                    this.alertUpdateConnexion("Connexion perdue")
-                    this.connectivity = false;
-                    break;
-                default:
-                    console.log("Connected to internet");
-                    this.alertUpdateConnexion("Vous êtes connecté à internet")
-                    this.connectivity = true;
+            if(newConnectionType === 0){
+                console.log("Lost connexion");
+                this.alertUpdateConnexion("Connexion perdue")
+                this.connectivity = false;
+            }
+            else{
+                console.log("Connected to internet");
+                this.alertUpdateConnexion("Vous êtes connecté à internet")
+                this.connectivity = true;
             }
         });
 
