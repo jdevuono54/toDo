@@ -6,6 +6,10 @@
         <ListView v-for="todo in todos" @itemTap="showTodo">
             <v-template>
                 <Label :text="todo.content"/>
+                <DockLayout stretchLastChild="false">
+                    <Label :text="todo.content" dock="left" width="80%"/>
+                    <Switch checked="true" dock="right" width="20%"/>
+                </DockLayout>
             </v-template>
         </ListView>
     </Page>
@@ -51,7 +55,10 @@
     };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+    Label{
+        text-align: left;
+    }
     page {
         background: linear-gradient(#185abd, #3293e9);
     }
