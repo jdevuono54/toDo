@@ -4,6 +4,7 @@ import Todo from "./views/Todo"
 import axios from "axios";
 import { Couchbase } from "nativescript-couchbase-plugin";
 import store from './store';
+import * as connectivityModule from "tns-core-modules/connectivity";
 
 Vue.prototype.$bus = new Vue()
 
@@ -12,8 +13,6 @@ Vue.prototype.$http = axios.create({
 });
 
 Vue.prototype.$dbUser = new Couchbase("user");
-
-Vue.prototype.$dbUse = "ok"
 
 new Vue({
     store,
@@ -29,11 +28,36 @@ new Vue({
     },
     data(){
         return{
-            connected:false
+            connected:false,
+            connectivity: null
         }
     },
+    methods:{
+      alertUpdateConnexion(msg){
+          alert({
+              title: "Connexion",
+              message: msg,
+              okButtonText: "Ok"
+          })
+      }
+    },
     created:function () {
+        connectivityModule.startMonitoring((newConnectionType) => {
+            switch (newConnectionType) {
+                case connectivityModule.connectionType.none:
+                    console.log("Lost connexion");
+                    this.alertUpdateConnexion("Connexion perdue")
+                    this.connectivity = false;
+                    break;
+                default:
+                    console.log("Connected to internet");
+                    this.alertUpdateConnexion("Vous êtes connecté à internet")
+                    this.connectivity = true;
+            }
+        });
+
         this.$store.commit("saveUser",this.$dbUser.query({})[0])
+
         if(this.$store.state.user != null){
             this.connected = true
         }
