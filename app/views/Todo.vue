@@ -39,6 +39,9 @@
                 ).then((response) => {
                     console.log("Récupération des todos réussie")
                     this.$store.commit("AddAllTodos", response.data)
+                    if(this.$dbTodos.query({}).length === 0){
+                        this.$dbTodos.createDocument(this.$store.state.todos)
+                    }
                 }).catch((e) => {
                     console.log("Erreur de récupération des todos", e)
                 })
@@ -52,7 +55,9 @@
                 this.$navigateTo(DetailItem,{props : {todo : event.item}})
             },
             checkTodo(todo){
-                console.log(this.$dbTodos.query({}))
+                console.log(todo.done)
+               // this.$dbUser.updateDocument(this.$store.state.user.id, this.$store.state.user)
+               // console.log(this.$dbTodos.query({}))
             }
         }
     };
