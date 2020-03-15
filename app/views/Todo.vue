@@ -13,12 +13,18 @@
 
 <script>
     import AddItem from "../components/Todo/AddItem";
+    import DetailItem from "../components/Todo/DetailItem";
 
     export default {
         name: "Todo",
         computed: {
             todos: function () {
                 return this.$store.state.todos.todos
+            }
+        },
+        data:function(){
+            return{
+                selectedTodo:null
             }
         },
         created: function () {
@@ -38,8 +44,8 @@
             addTodo() {
                 this.$showModal(AddItem);
             },
-            showTodo() {
-
+            showTodo(event) {
+                this.$navigateTo(DetailItem,{props : {todo : event.item}})
             }
         }
     };
