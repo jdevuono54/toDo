@@ -13,6 +13,7 @@ Vue.prototype.$http = axios.create({
 });
 
 Vue.prototype.$dbUser = new Couchbase("user");
+Vue.prototype.$dbTodos = new Couchbase("todos");
 
 new Vue({
     store,

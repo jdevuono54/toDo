@@ -5,14 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        user:null
+        user:null,
+        todos:[]
     },
     mutations: {
         saveUser(state, user) {
             state.user = user
         },
         addTodo(state,todo){
-            state.user.user.todos.push(todo);
+            state.todos.todos.push(todo);
+        },
+        AddAllTodos(state,todos){
+            state.todos = todos
         }
     }
 })
