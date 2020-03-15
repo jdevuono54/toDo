@@ -17,6 +17,7 @@
         methods:{
             addItem(){
                 this.$store.commit("addTodo",new todo(this.itemVal,false))
+                this.$dbUser.updateDocument(this.$store.state.user.id, this.$store.state.user)
                 this.$modal.close();
             }
         }
