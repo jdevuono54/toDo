@@ -8,7 +8,7 @@
                 <Label :text="todo.content"/>
                 <DockLayout stretchLastChild="false">
                     <Label :text="todo.content" dock="left" width="80%"/>
-                    <Switch checked="true" dock="right" width="20%"/>
+                    <Switch :checked="todo.done" dock="right" width="20%" @tap="checkTodo(todo)"/>
                 </DockLayout>
             </v-template>
         </ListView>
@@ -50,6 +50,9 @@
             },
             showTodo(event) {
                 this.$navigateTo(DetailItem,{props : {todo : event.item}})
+            },
+            checkTodo(todo){
+                console.log(this.$dbTodos.query({}))
             }
         }
     };
