@@ -19,7 +19,9 @@
                             headers: {Authorization: 'Bearer ' + this.$store.state.user.token}
                         }
                     ).then((response) => {
+                        let id = this.$dbTodos.query({})[0].id;
                         this.$store.commit("deleteTodo", this.todo)
+                        this.$dbTodos.updateDocument(id, this.$store.state.todos)
                         this.$navigateBack();
                         console.log("Suppresion de la todo réussie")
                     }).catch((e) => {
