@@ -21,7 +21,9 @@
         methods: {
             addItem() {
                 this.$store.commit("addTodo", new todo(this.itemVal, false))
-                this.$dbUser.updateDocument(this.$store.state.user.id, this.$store.state.user)
+                let id = this.$dbTodos.query({})[0].id;
+
+                this.$dbTodos.updateDocument(id, this.$store.state.todos)
                 if (this.$root.connectivity === true) {
                     this.addOnline()
                 }
@@ -40,7 +42,7 @@
                 ).then((response) => {
                     console.log("Sauvegarde de la todo")
                 }).catch((e) => {
-                    console.log("Erreur lors de la sauvegarde la todo")
+                    console.log("Erreur lors de la sauvegarde la todo"+e.response.request._response)
                 })
             }
         }

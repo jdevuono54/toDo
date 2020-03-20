@@ -13,10 +13,18 @@ export default new Vuex.Store({
             state.user = user
         },
         addTodo(state,todo){
-            state.todos.todos.push(todo);
+            if(!state.todos.todos){
+                state.todos.todos = [todo]
+            }
+            else{
+                state.todos.todos.push(todo);
+            }
         },
         AddAllTodos(state,todos){
             state.todos = todos
+        },
+        switchTodo(state,todo){
+           state.todos.todos[state.todos.todos.indexOf(todo)].done = !state.todos.todos[state.todos.todos.indexOf(todo)].done
         }
     }
 })

@@ -5,7 +5,6 @@
         </ActionBar>
         <ListView v-for="todo in todos" @itemTap="showTodo">
             <v-template>
-                <Label :text="todo.content"/>
                 <DockLayout stretchLastChild="false">
                     <Label :text="todo.content" dock="left" width="80%"/>
                     <Switch :checked="todo.done" dock="right" width="20%" @tap="checkTodo(todo)"/>
@@ -55,9 +54,10 @@
                 this.$navigateTo(DetailItem,{props : {todo : event.item}})
             },
             checkTodo(todo){
-                console.log(todo.done)
-               // this.$dbUser.updateDocument(this.$store.state.user.id, this.$store.state.user)
-               // console.log(this.$dbTodos.query({}))
+                this.$store.commit("switchTodo", todo)
+                let id = this.$dbTodos.query({})[0].id;
+
+                this.$dbTodos.updateDocument(id, this.$store.state.todos)
             }
         }
     };
