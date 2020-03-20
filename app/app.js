@@ -57,6 +57,7 @@ new Vue({
         });
 
         this.$store.commit("saveUser",this.$dbUser.query({})[0])
+        this.$store.commit("AddAllTodos",this.$dbTodos.query({})[0])
 
         if(this.$store.state.user != null){
             this.connected = true
