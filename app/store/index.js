@@ -25,6 +25,9 @@ export default new Vuex.Store({
         },
         switchTodo(state,todo){
            state.todos.todos[state.todos.todos.indexOf(todo)].done = !state.todos.todos[state.todos.todos.indexOf(todo)].done
+        },
+        deleteTodo(state,todo){
+            state.todos.todos.splice(state.todos.todos.indexOf(todo),1)
         }
     }
 })
