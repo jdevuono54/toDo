@@ -58,6 +58,19 @@
                 let id = this.$dbTodos.query({})[0].id;
 
                 this.$dbTodos.updateDocument(id, this.$store.state.todos)
+
+                if (this.$root.connectivity === true) {
+                    this.$http.patch('users/' + this.$store.state.user.user.uuid + "/todos/"+todo.uuid, {
+                        "done":todo.done
+                        },{
+                            headers: {Authorization: 'Bearer ' + this.$store.state.user.token}
+                        }
+                    ).then((response) => {
+                        console.log("Modification de la todo réussie")
+                    }).catch((e) => {
+                        console.log("Modificatio échouée");
+                    })
+                }
             }
         }
     };
