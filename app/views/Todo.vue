@@ -22,7 +22,9 @@
         name: "Todo",
         computed: {
             todos: function () {
-                return this.$store.state.todos.todos
+                if(this.$store.state.todos !== undefined){
+                    return this.$store.state.todos.todos
+                }
             }
         },
         data:function(){
